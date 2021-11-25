@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import './index.css'
 import './App.css';
 import axios from 'axios';
+import MovieCard from './components/MovieCard';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -43,7 +44,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="p-">
       <h2>Movie List</h2>
       <div>
         <input
@@ -62,7 +63,7 @@ function App() {
         <ul>
           {movies.map((movie) => (
             <li key={movie.id}>
-              <img width="300px" src="./noimageplaceholder.webp" alt="movie cover" />
+              <img width="300px" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie cover" />
               <div>
                 <h3>{movie.original_title}</h3>
                 <p>{movie.overview ? movie.overview : 'no description'}</p>
@@ -75,11 +76,15 @@ function App() {
         </ul>
       )}
 
+      <MovieCard/>
+
+      
+{/* 
       <h2>Favourite</h2>
       {favourite.map((movie) => (
         <>
           <div key={movie.id}>
-            <img width="300px" src="./noimageplaceholder.webp" alt="movie cover" />
+            <img width="300px" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie cover" />
             <h3>{movie.original_title}</h3>
             <p>{movie.overview ? movie.overview : 'no description'}</p>
           </div>
@@ -87,8 +92,8 @@ function App() {
             Remove from Favourite
           </button>
         </>
-      ))}
-    </>
+      ))} */}
+    </div>
   );
 }
 
