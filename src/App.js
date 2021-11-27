@@ -34,6 +34,8 @@ function App() {
     setWatchlater(movieFavourites)
   }, []);
 
+  const notify = () => toast("Wow so easy !");
+
   const saveToLocalStorage = (value) => {
     localStorage.setItem('movie-tube-123', JSON.stringify(value));
   };
@@ -48,10 +50,10 @@ function App() {
   };
 
   const addToFavourite = (movie) => {
-// if (favourites.find((item) => item.id === movie.id)) {
-//       toast.error('Movie already added to favourite');
-//       return;
-//     }
+if (favourites.find((item) => item.id === movie.id)) {
+      toast.error('Movie already added to favourite');
+      return;
+    }
 
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
@@ -59,9 +61,18 @@ function App() {
     saveToLocalStorage(newFavouriteList);
   };
   const addToWatchlater = (movie) => {
+    if (watchlater.find((item) => item.id === movie.id)) {
+      toast.error('Movie already added to watch later');
+      return;
+    }
+
     const newLaterList = [...watchlater, movie];
     setWatchlater(newLaterList);
     saveToLocalStorage(newLaterList);
+    // display toast after adding to favourites
+    toast.success('Added to Watch Later');
+
+    
   };
 
   const removeFavouriteMovie = (movie) => {
@@ -71,6 +82,9 @@ function App() {
 
     setFavourites(newFavouriteList);
     saveToLocalStorage(newFavouriteList);
+
+    toast.success('Removed from Favourite');
+
   };
   const removeLaterMovie = (movie) => {
     const newLaterList = watchlater.filter(
@@ -79,6 +93,9 @@ function App() {
 
     setWatchlater(newLaterList);
     saveToLocalStorage(newLaterList);
+
+    toast.success('Removed from Watch Later');
+
   };
 
   return (
@@ -110,6 +127,7 @@ function App() {
           ))}
         </ul>
       )} */}
+       
         {active === '' ? (
           <>
             <div>
@@ -139,6 +157,7 @@ function App() {
                         <i class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"></i>
                       </span>{' '}
                     </div>
+                    
                   </div>
                 </div>
               </div>
@@ -152,6 +171,7 @@ function App() {
               }
               laterIcon={<MdOutlineWatchLater className="later" size={20} />}
             />
+            <ToastContainer />
           </>
         ) : active === 'favourite' ? (
           <>
@@ -167,10 +187,13 @@ function App() {
                 addIcon={
                   <AiFillHeart className="fav" size={20} color="red" />
                 }
+                selectWatch={addToWatchlater}
                 laterIcon={<MdOutlineWatchLater className="later" size={20} />}
                 favComp={''}
               />
             )}
+            <ToastContainer />
+
           </>
         ) : active === 'watchlater' ? (
           <>
@@ -186,6 +209,8 @@ function App() {
                 }
                 favComp={''}
               />
+            <ToastContainer />
+
               </>
         ): ''}
 
