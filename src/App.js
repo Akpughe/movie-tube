@@ -7,7 +7,7 @@ import SideNav from './components/Sidebar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineSearch, AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import {MdOutlineWatchLater, MdDelete} from 'react-icons/md'
+import { MdOutlineWatchLater, MdDelete } from 'react-icons/md';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -31,10 +31,10 @@ function App() {
     if (movieFavourites) {
       setFavourites(movieFavourites);
     }
-    setWatchlater(movieFavourites)
+    setWatchlater(movieFavourites);
   }, []);
 
-  const notify = () => toast("Wow so easy !");
+  const notify = () => toast('Wow so easy !');
 
   const saveToLocalStorage = (value) => {
     localStorage.setItem('movie-tube-123', JSON.stringify(value));
@@ -50,19 +50,33 @@ function App() {
   };
 
   const addToFavourite = (movie) => {
-if (favourites.find((item) => item.id === movie.id)) {
-      toast.error('Movie already added to favourite');
+    if (favourites.find((item) => item.id === movie.id)) {
+      toast.error('Movie already added to favourite', {
+        autoClose: 1000,
+      });
       return;
     }
 
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
-    toast.success('Added to Favourites');
+
+    toast.success('Added to favourite', {
+      position: 'top-right',
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     saveToLocalStorage(newFavouriteList);
   };
   const addToWatchlater = (movie) => {
     if (watchlater.find((item) => item.id === movie.id)) {
-      toast.error('Movie already added to watch later');
+      toast.error('Movie already added to watch later', {
+        autoClose: 1000,
+        position: 'bottom-left',
+      });
       return;
     }
 
@@ -70,9 +84,15 @@ if (favourites.find((item) => item.id === movie.id)) {
     setWatchlater(newLaterList);
     saveToLocalStorage(newLaterList);
     // display toast after adding to favourites
-    toast.success('Added to Watch Later');
-
-    
+    toast.success('Added to watch later', {
+      position: 'bottom-left',
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const removeFavouriteMovie = (movie) => {
@@ -83,19 +103,19 @@ if (favourites.find((item) => item.id === movie.id)) {
     setFavourites(newFavouriteList);
     saveToLocalStorage(newFavouriteList);
 
-    toast.success('Removed from Favourite');
-
+    toast.success('Removed from Favourite', {
+      autoClose: 1000,
+    });
   };
   const removeLaterMovie = (movie) => {
-    const newLaterList = watchlater.filter(
-      (later) => later.id !== movie.id
-    );
+    const newLaterList = watchlater.filter((later) => later.id !== movie.id);
 
     setWatchlater(newLaterList);
     saveToLocalStorage(newLaterList);
 
-    toast.success('Removed from Watch Later');
-
+    toast.success('Removed from Watch Later', {
+      autoClose: 1000,
+    });
   };
 
   return (
@@ -127,7 +147,7 @@ if (favourites.find((item) => item.id === movie.id)) {
           ))}
         </ul>
       )} */}
-       
+
         {active === '' ? (
           <>
             <div>
@@ -157,7 +177,6 @@ if (favourites.find((item) => item.id === movie.id)) {
                         <i class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"></i>
                       </span>{' '}
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -184,35 +203,29 @@ if (favourites.find((item) => item.id === movie.id)) {
               <MovieCard
                 movies={favourites}
                 selectFavourite={removeFavouriteMovie}
-                addIcon={
-                  <AiFillHeart className="fav" size={20} color="red" />
-                }
+                addIcon={<AiFillHeart className="fav" size={20} color="red" />}
                 selectWatch={addToWatchlater}
                 laterIcon={<MdOutlineWatchLater className="later" size={20} />}
                 favComp={''}
               />
             )}
             <ToastContainer />
-
           </>
         ) : active === 'watchlater' ? (
           <>
-          <h1 className="text-xl font-semibold">
-              Watch later movies
-            </h1>
-          <MovieCard
-                movies={watchlater}
-                // selectFavourite={removeFavouriteMovie}
-                removeLater={removeLaterMovie}
-                removeIcon={
-                 <MdDelete size={20}/>
-                }
-                favComp={''}
-              />
+            <h1 className="text-xl font-semibold">Watch later movies</h1>
+            <MovieCard
+              movies={watchlater}
+              // selectFavourite={removeFavouriteMovie}
+              removeLater={removeLaterMovie}
+              removeIcon={<MdDelete size={20} />}
+              favComp={''}
+            />
             <ToastContainer />
-
-              </>
-        ): ''}
+          </>
+        ) : (
+          ''
+        )}
 
         {/* 
       <h2>Favourite</h2>
