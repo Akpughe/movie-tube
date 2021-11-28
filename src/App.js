@@ -6,7 +6,7 @@ import MovieCard from './components/MovieCard';
 import SideNav from './components/Sidebar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AiOutlineSearch, AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { AiOutlineSearch, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { MdOutlineWatchLater, MdDelete } from 'react-icons/md';
 
 function App() {
@@ -33,8 +33,6 @@ function App() {
     }
     setWatchlater(movieFavourites);
   }, []);
-
-  const notify = () => toast('Wow so easy !');
 
   const saveToLocalStorage = (value) => {
     localStorage.setItem('movie-tube-123', JSON.stringify(value));
@@ -195,16 +193,19 @@ function App() {
               </div>
             </div>
             {loading ? (
+              <>
               <h1 className="text-6xl opacity-40 font-bold">
-                Search for movie
+                Type to search...
               </h1>
+              <span className="text-lg opacity-40 font-semibold">Let's find a movie for you</span>
+              </>
             ) : (
               <MovieCard
                 movies={movies}
                 selectFavourite={addToFavourite}
                 selectWatch={addToWatchlater}
                 addIcon={
-                  <AiOutlineHeart className="fav" size={20} color="black" />
+                  <AiOutlineStar className="fav" size={20} color="black" />
                 }
                 laterIcon={<MdOutlineWatchLater className="later" size={20} />}
               />
@@ -223,7 +224,7 @@ function App() {
               <MovieCard
                 movies={favourites}
                 selectFavourite={removeFavouriteMovie}
-                addIcon={<AiFillHeart className="fav" size={20} color="red" />}
+                addIcon={<AiFillStar className="fav" size={20} color="yellow" />}
                 selectWatch={addToWatchlater}
                 laterIcon={<MdOutlineWatchLater className="later" size={20} />}
                 favComp={''}

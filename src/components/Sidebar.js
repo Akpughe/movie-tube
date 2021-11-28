@@ -1,10 +1,4 @@
-import React, { useState } from 'react';
-import {
-  AiOutlineUnorderedList,
-  AiOutlineHistory,
-  AiOutlineShoppingCart,
-} from 'react-icons/ai';
-import { RiBarChartBoxLine } from 'react-icons/ri';
+import React from 'react';
 const SideNav = ({ openFav, openWatchLater, openHome, borderColor, borderColor2, textColor, textColor2 }) => {
   return (
     <nav className="navbar bg-white sm:w-56 w-screen sm:h-screen h-20 sm:flex flex bottom-0 fixed sm:flex-col py-6 sm:px-0 px-6 rounded-tl-2xl rounded-bl-2xl border-r-2">
