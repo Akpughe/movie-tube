@@ -5,9 +5,9 @@ import {
   AiOutlineShoppingCart,
 } from 'react-icons/ai';
 import { RiBarChartBoxLine } from 'react-icons/ri';
-const SideNav = ({ openFav, openWatchLater, openHome }) => {
+const SideNav = ({ openFav, openWatchLater, openHome, borderColor, borderColor2, textColor, textColor2 }) => {
   return (
-    <nav className="bg-white w-56 h-screen flex fixed flex-col py-6 rounded-tl-2xl rounded-bl-2xl border-r-2">
+    <nav className="navbar bg-white sm:w-56 w-screen sm:h-screen h-20 sm:flex flex bottom-0 fixed sm:flex-col py-6 rounded-tl-2xl rounded-bl-2xl border-r-2">
       <div className="flex justify-center mb-20">
         <h3>
           {' '}
@@ -18,12 +18,12 @@ const SideNav = ({ openFav, openWatchLater, openHome }) => {
       </div>
 
       <div>
-        <ul>
-          <li className=" border-l-4 pl-8 cursor-pointer" onClick={openFav}>
+        <ul className='flex flex-row sm:flex sm:flex-col'>
+          <li className={`sm:border-l-4 border-l-0 pl-8 cursor-pointer ${borderColor} ${textColor}` } onClick={openFav}>
             {/* <AiOutlineUnorderedList size={25} /> */}
             Favourite
           </li>
-          <li className="pl-8 my-12 cursor-pointer" onClick={openWatchLater}>
+          <li className={`pl-8 sm:my-12 my-0 sm:border-l-4 border-l-0 cursor-pointer ${borderColor2} ${textColor2}`} onClick={openWatchLater}>
             {/* <AiOutlineHistory size={25} /> */}
             Watch Later
           </li>

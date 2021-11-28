@@ -117,6 +117,7 @@ function App() {
       autoClose: 1000,
     });
   };
+  console.log(active)
 
   return (
     <div className="flex">
@@ -124,8 +125,20 @@ function App() {
         openHome={() => handleActive('')}
         openFav={() => handleActive('favourite')}
         openWatchLater={() => handleActive('watchlater')}
+        borderColor={
+          active === 'favourite'
+            ? 'border-green-600' :''
+           
+        }
+        borderColor2={
+           active === 'watchlater'
+            ? 'border-yellow-600'
+            : ''
+        }
+        textColor={active == 'favourite' ? 'sm:text-black text-green-600': ''}
+        textColor2={active == 'watchlater' ? 'sm:text-black text-yellow-600': ''}
       />
-      <div className="w-full py-6 px-10 bg-gray-100 h-full ml-52">
+      <div className="w-full py-6 px-10 bg-gray-100 h-full sm:ml-52 ml-0">
         {/* 
       {loading ? (
         <div>
@@ -181,15 +194,22 @@ function App() {
                 </div>
               </div>
             </div>
-            <MovieCard
-              movies={movies}
-              selectFavourite={addToFavourite}
-              selectWatch={addToWatchlater}
-              addIcon={
-                <AiOutlineHeart className="fav" size={20} color="black" />
-              }
-              laterIcon={<MdOutlineWatchLater className="later" size={20} />}
-            />
+            {loading ? (
+              <h1 className="text-6xl opacity-40 font-bold">
+                Search for movie
+              </h1>
+            ) : (
+              <MovieCard
+                movies={movies}
+                selectFavourite={addToFavourite}
+                selectWatch={addToWatchlater}
+                addIcon={
+                  <AiOutlineHeart className="fav" size={20} color="black" />
+                }
+                laterIcon={<MdOutlineWatchLater className="later" size={20} />}
+              />
+            )}
+
             <ToastContainer />
           </>
         ) : active === 'favourite' ? (
