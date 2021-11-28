@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AiFillStar, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { MdOutlineWatchLater } from 'react-icons/md';
 
-const MovieCard = ({ movies, selectFavourite, removeLater, selectWatch, removeIcon, addIcon, laterIcon }) => {
+const MovieCard = ({ movies, selectFavourite, removeLater, selectWatch, removeIcon, addIcon, laterIcon, add_to_favourite_text }) => {
   return (
     <div className="flex overflow-hidden flex-wrap mt-10">
       {movies.map((movie) => {
@@ -28,22 +28,26 @@ const MovieCard = ({ movies, selectFavourite, removeLater, selectWatch, removeIc
                   </p>
                 </div>
                 {/* fav */}
-                <div>
+                <div style={{position:'relative'}}>
                   <div
-                    className="flex mb-3"
+                    className="ha2f flex mb-3"
                     onClick={() => selectFavourite(movie)}
                   >
+                    <span className="a2f">{add_to_favourite_text}</span>
                     {addIcon}
                     {/* <AiFillHeart className="fav" size={20} color="black" /> */}
                   </div>
                   <div
-                    className="flex mb-3"
+                    className="ha2f flex mb-3"
                     onClick={() => removeLater(movie)}
                   >
+                    <span className="a2f">{add_to_favourite_text}</span>
                     {removeIcon}{' '}
                   </div>
-                  <div className="flex" onClick={() => selectWatch(movie)}>
+                  <div className="ha2f flex" onClick={() => selectWatch(movie)}>
                     {/* <MdOutlineWatchLater className="later" size={20} /> */}
+                    <span className="a2f">add to watch later</span>
+
                     {laterIcon}
                   </div>
                 </div>

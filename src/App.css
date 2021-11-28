@@ -8,10 +8,23 @@
   display: none;
 }
     
-.fav:hover + .hide {
-  display: block;
+.a2f{
+    visibility: hidden;
+    width: 130px;
+    background-color: white;
+    color: rgba(217, 119, 6);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    /* top: -5px; */
+    right: 30px;
 }
-.later:hover + .hide {
-  display: block !important;
+
+.ha2f:hover .a2f{
+  visibility: visible;
 }
 

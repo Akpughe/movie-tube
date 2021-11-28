@@ -204,6 +204,7 @@ function App() {
                 movies={movies}
                 selectFavourite={addToFavourite}
                 selectWatch={addToWatchlater}
+                add_to_favourite_text="Add to favourite"
                 addIcon={
                   <AiOutlineStar className="fav" size={20} color="black" />
                 }
@@ -225,6 +226,7 @@ function App() {
                 movies={favourites}
                 selectFavourite={removeFavouriteMovie}
                 addIcon={<AiFillStar className="fav" size={20} color="yellow" />}
+                add_to_favourite_text="Remove from favourite"
                 selectWatch={addToWatchlater}
                 laterIcon={<MdOutlineWatchLater className="later" size={20} />}
                 favComp={''}
@@ -239,7 +241,9 @@ function App() {
               movies={watchlater}
               // selectFavourite={removeFavouriteMovie}
               removeLater={removeLaterMovie}
-              removeIcon={<MdDelete size={20} />}
+              add_to_favourite_text="Remove from watch later"
+
+              removeIcon={<MdDelete size={20} color="red" />}
               favComp={''}
             />
             <ToastContainer />
