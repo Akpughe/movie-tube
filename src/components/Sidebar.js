@@ -7,7 +7,7 @@ import {
 import { RiBarChartBoxLine } from 'react-icons/ri';
 const SideNav = ({ openFav, openWatchLater, openHome, borderColor, borderColor2, textColor, textColor2 }) => {
   return (
-    <nav className="navbar bg-white sm:w-56 w-screen sm:h-screen h-20 sm:flex flex bottom-0 fixed sm:flex-col py-6 rounded-tl-2xl rounded-bl-2xl border-r-2">
+    <nav className="navbar bg-white sm:w-56 w-screen sm:h-screen h-20 sm:flex flex bottom-0 fixed sm:flex-col py-6 sm:px-0 px-6 rounded-tl-2xl rounded-bl-2xl border-r-2">
       <div className="flex justify-center mb-20">
         <h3>
           {' '}
