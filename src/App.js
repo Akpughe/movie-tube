@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import MovieCard from './components/MovieCard';
 import SideNav from './components/Sidebar';
+import Button from './components/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineSearch, AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -145,37 +146,9 @@ function App() {
         }
       />
       <div className="home w-full py-6 px-10 h-full sm:ml-52 ml-0">
-        {/* 
-      {loading ? (
-        <div>
-          <h2>Search for a movie</h2>
-        </div>
-      ) : (
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.id}>
-              <img width="300px" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie cover" />
-              <div>
-                <h3>{movie.original_title}</h3>
-                <p>{movie.overview ? movie.overview : 'no description'}</p>
-              </div>
-              <button onClick={() => addToFavourite(movie)}>
-                Add to Favourite
-              </button>
-            </li>
-          ))}
-        </ul>
-      )} */}
-
         {active === '' ? (
           <>
             <div>
-              {/* <input
-                type="text"
-                placeholder="Type to search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              /> */}
               <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
                 <div class="md:flex">
                   <div class="w-full p-3">
@@ -218,22 +191,24 @@ function App() {
                 selectWatch={addToWatchlater}
                 add_to_favourite_text="Add to favourite"
                 addIcon={
-                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
-                    {' '}
-                    <span>add to favourite</span>{' '}
-                    <AiOutlineStar className="fav" size={20} color="white" />
-                  </button>
+                  <Button
+                    text="add to favourite"
+                    icon={
+                      <AiOutlineStar className="fav" size={20} color="white" />
+                    }
+                  />
                 }
                 laterIcon={
-                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
-                    {' '}
-                    <span>add to watch later</span>
-                    <MdOutlineWatchLater
-                      className="later"
-                      size={20}
-                      color="white"
-                    />
-                  </button>
+                  <Button
+                    text="add to watch later"
+                    icon={
+                      <MdOutlineWatchLater
+                        className="later"
+                        size={20}
+                        color="white"
+                      />
+                    }
+                  />
                 }
               />
             )}
@@ -251,21 +226,21 @@ function App() {
                 movies={favourites}
                 selectFavourite={removeFavouriteMovie}
                 addIcon={
-                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
-                    {' '}
-                    <span>remove from favourites</span>{' '}
-                    <AiFillStar className="fav" size={20} color="yellow" />
-                  </button>
+                  <Button
+                    text="remove from favourites"
+                    icon={
+                      <AiFillStar className="fav" size={20} color="yellow" />
+                    }
+                  />
                   // <AiFillStar className="fav" size={20} color="yellow" />
                 }
                 add_to_favourite_text="Remove from favourite"
                 selectWatch={addToWatchlater}
                 laterIcon={
-                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
-                    {' '}
-                    <span>add to watch later</span>
-                    <MdOutlineWatchLater className="later" size={20} />
-                  </button>
+                  <Button
+                    text="add to watch later"
+                    icon={<MdOutlineWatchLater className="later" size={20} />}
+                  />
                 }
                 favComp={''}
               />
@@ -285,15 +260,13 @@ function App() {
             {watchlater && (
               <MovieCard
                 movies={watchlater}
-                // selectFavourite={removeFavouriteMovie}
                 removeLater={removeLaterMovie}
                 add_to_favourite_text="Remove from watch later"
                 removeIcon={
-                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
-                    {' '}
-                    <span>remove from watch later</span>
-                    <MdDelete size={20} />
-                  </button>
+                  <Button
+                    text="remove from watch later"
+                    icon={<MdDelete size={20} />}
+                  />
                 }
                 favComp={''}
               />
@@ -304,21 +277,6 @@ function App() {
         ) : (
           ''
         )}
-
-        {/* 
-      <h2>Favourite</h2>
-      {favourite.map((movie) => (
-        <>
-          <div key={movie.id}>
-            <img width="300px" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie cover" />
-            <h3>{movie.original_title}</h3>
-            <p>{movie.overview ? movie.overview : 'no description'}</p>
-          </div>
-          <button onClick={() => removeFavorite(movie)}>
-            Remove from Favourite
-          </button>
-        </>
-      ))} */}
       </div>
     </div>
     // </div>
