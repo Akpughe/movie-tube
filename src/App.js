@@ -27,11 +27,13 @@ function App() {
 
   useEffect(() => {
     const movieFavourites = JSON.parse(localStorage.getItem('movie-tube-123'));
+    const movieLater = JSON.parse(localStorage.getItem('movie-tube-123'));
 
     if (movieFavourites) {
       setFavourites(movieFavourites);
+    } else if (movieLater) {
+      setWatchlater(movieFavourites);
     }
-    setWatchlater(movieFavourites);
   }, []);
 
   const saveToLocalStorage = (value) => {
@@ -115,8 +117,6 @@ function App() {
       autoClose: 1000,
     });
   };
-  console.log(active)
-
   return (
     <div className="flex">
       <SideNav
@@ -125,18 +125,26 @@ function App() {
         openWatchLater={() => handleActive('watchlater')}
         borderColor={
           active === 'favourite'
-            ? 'border-green-600' :''
-           
-        }
-        borderColor2={
-           active === 'watchlater'
-            ? 'border-yellow-600'
+            ? 'sm:text-yellow-600 sm:border-yellow-600 border-transparent text-white'
             : ''
         }
-        textColor={active == 'favourite' ? 'sm:text-black text-green-600': ''}
-        textColor2={active == 'watchlater' ? 'sm:text-black text-yellow-600': ''}
+        borderColor2={
+          active === 'watchlater'
+            ? 'sm:text-yellow-600 sm:border-yellow-600 border-transparent text-white'
+            : ''
+        }
+        textColor={
+          active === 'favourite'
+            ? 'sm:bg-transparent bg-yellow-600 sm:rounded rounded-none'
+            : ''
+        }
+        textColor2={
+          active === 'watchlater'
+            ? 'sm:bg-transparent bg-yellow-600 sm:rounded rounded-none'
+            : ''
+        }
       />
-      <div className="w-full py-6 px-10 bg-gray-100 h-full sm:ml-52 ml-0">
+      <div className="home w-full py-6 px-10 h-full sm:ml-52 ml-0">
         {/* 
       {loading ? (
         <div>
@@ -180,7 +188,7 @@ function App() {
                         type="text"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="bg-white h-14 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
+                        className="bg-white h-14 w-full px-12 rounded-lg focus:outline-none  border border-yellow-600"
                         name=""
                         placeholder="Search for a movie"
                       />{' '}
@@ -194,11 +202,15 @@ function App() {
             </div>
             {loading ? (
               <>
-              <h1 className="text-6xl opacity-40 font-bold">
-                Type to search...
-              </h1>
-              <span className="text-lg opacity-40 font-semibold">Let's find a movie for you</span>
+                <h1 className="text-6xl opacity-40 font-bold">
+                  Type to search...
+                </h1>
+                <span className="text-lg opacity-40 font-semibold">
+                  Let's find a movie for you
+                </span>
               </>
+            ) : movies.length == 0 ? (
+              <h1 className="text-2xl opacity-40 font-bold">No result found</h1>
             ) : (
               <MovieCard
                 movies={movies}
@@ -206,29 +218,55 @@ function App() {
                 selectWatch={addToWatchlater}
                 add_to_favourite_text="Add to favourite"
                 addIcon={
-                  <AiOutlineStar className="fav" size={20} color="black" />
+                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
+                    {' '}
+                    <span>add to favourite</span>{' '}
+                    <AiOutlineStar className="fav" size={20} color="white" />
+                  </button>
                 }
-                laterIcon={<MdOutlineWatchLater className="later" size={20} />}
+                laterIcon={
+                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
+                    {' '}
+                    <span>add to watch later</span>
+                    <MdOutlineWatchLater
+                      className="later"
+                      size={20}
+                      color="white"
+                    />
+                  </button>
+                }
               />
             )}
-
             <ToastContainer />
           </>
         ) : active === 'favourite' ? (
           <>
-            <h1 className="text-xl font-semibold">
+            <h1 className="text-xl font-semibold text-yellow-600">
               Favourite{favourites && favourites.length > 1 ? 's' : ''}
             </h1>
             {favourites.length == 0 ? (
-              <h2>You have no favourite</h2>
+              <h1>You have no favourite</h1>
             ) : (
               <MovieCard
                 movies={favourites}
                 selectFavourite={removeFavouriteMovie}
-                addIcon={<AiFillStar className="fav" size={20} color="yellow" />}
+                addIcon={
+                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
+                    {' '}
+                    <span>remove from favourites</span>{' '}
+                    <AiFillStar className="fav" size={20} color="yellow" />
+                  </button>
+                  // <AiFillStar className="fav" size={20} color="yellow" />
+                }
                 add_to_favourite_text="Remove from favourite"
                 selectWatch={addToWatchlater}
-                laterIcon={<MdOutlineWatchLater className="later" size={20} />}
+                laterIcon={
+                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
+                    {' '}
+                    <span>add to watch later</span>
+                    <MdOutlineWatchLater className="later" size={20} />
+                  </button>
+                }
                 favComp={''}
               />
             )}
@@ -236,16 +274,31 @@ function App() {
           </>
         ) : active === 'watchlater' ? (
           <>
-            <h1 className="text-xl font-semibold">Watch later movies</h1>
-            <MovieCard
-              movies={watchlater}
-              // selectFavourite={removeFavouriteMovie}
-              removeLater={removeLaterMovie}
-              add_to_favourite_text="Remove from watch later"
+            <h1 className="text-xl font-semibold text-yellow-600">
+              Watch later movies
+            </h1>
+            {watchlater && watchlater.length == 0 ? (
+              <h2>You have no movie to watch later</h2>
+            ) : (
+              ''
+            )}
+            {watchlater && (
+              <MovieCard
+                movies={watchlater}
+                // selectFavourite={removeFavouriteMovie}
+                removeLater={removeLaterMovie}
+                add_to_favourite_text="Remove from watch later"
+                removeIcon={
+                  <button className=" inline-flex items-center font-normal text-xs bg-yellow-600 px-1 py-1 rounded text-white">
+                    {' '}
+                    <span>remove from watch later</span>
+                    <MdDelete size={20} />
+                  </button>
+                }
+                favComp={''}
+              />
+            )}
 
-              removeIcon={<MdDelete size={20} color="red" />}
-              favComp={''}
-            />
             <ToastContainer />
           </>
         ) : (

@@ -1,30 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 
-*{
+* {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.hide {
-  display: none;
-}
-    
-.a2f{
-    visibility: hidden;
-    width: 130px;
-    background-color: white;
-    color: rgba(217, 119, 6);
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    /* top: -5px; */
-    right: 30px;
+.navbar {
+  background-color: #191827 !important;
 }
 
-.ha2f:hover .a2f{
+.home {
+  background: linear-gradient(90deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+.mmm{
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+
+  width: 100%;
+  color: black;
+}
+
+.wrap:hover img {
   visibility: visible;
+  opacity: 0.3;
+  background: black;
+}
+.wrap:hover .mmm {
+  visibility: visible;
+  opacity: 1;
+  color: black;
 }
 
+.side-item{
+  color: white;
+}
+.side-item .active{
+  color: red;
+}
+
+@media (max-width: 639px) {
+  .navbar {
+    background-color: #191827 !important;
+  }
+
+  
+}
