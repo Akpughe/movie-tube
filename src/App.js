@@ -32,7 +32,6 @@ function App() {
 
     if (movieFavourites) {
       setFavourites(movieFavourites);
-    } else if (movieLater) {
       setWatchlater(movieFavourites);
     }
   }, []);
